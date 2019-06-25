@@ -32,7 +32,7 @@ var debug = (0, _debug2.default)('CDO');
 
 var CDO = function () {
   function CDO(token) {
-    var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     _classCallCheck(this, CDO);
 
@@ -45,86 +45,86 @@ var CDO = function () {
   _createClass(CDO, [{
     key: 'datasets',
     value: function datasets() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('datasets', _extends({ params: params }, config));
     }
   }, {
     key: 'dataset',
     value: function dataset(id) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('datasets/' + id, config);
     }
   }, {
     key: 'datacategories',
     value: function datacategories() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('datacategories', _extends({ params: params }, config));
     }
   }, {
     key: 'datacategory',
     value: function datacategory(id) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('datacategories/' + id, config);
     }
   }, {
     key: 'datatypes',
     value: function datatypes() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('datatypes', _extends({ params: params }, config));
     }
   }, {
     key: 'datatype',
     value: function datatype(id) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('datatypes/' + id, config);
     }
   }, {
     key: 'locationcategories',
     value: function locationcategories() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('locationcategories', _extends({ params: params }, config));
     }
   }, {
     key: 'locationcategory',
     value: function locationcategory(id) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('locationcategories/' + id, config);
     }
   }, {
     key: 'locations',
     value: function locations() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('locations', _extends({ params: params }, config));
     }
   }, {
     key: 'location',
     value: function location(id) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('locations/' + id, config);
     }
   }, {
     key: 'stations',
     value: function stations() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('stations', _extends({ params: params }, config));
     }
   }, {
     key: 'station',
     value: function station(id) {
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('stations/' + id, config);
     }
   }, {
     key: 'data',
     value: function data() {
-      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       return this.request('data', _extends({ params: params }, config));
     }
   }, {
@@ -144,7 +144,7 @@ var CDO = function () {
         return Promise.resolve(iteratee(res)).then(function (done) {
           if (done) return res;
           var nextParams = _this.constructor.paramsForNextPage((0, _lodash2.default)(res.metadata.resultset).pick('offset', 'limit').defaults(params).value());
-          if (params.offset >= nextParams.offset - nextParams.limit) return null;
+          if (params.offset >= res.metadata.resultset.count - params.limit) return null;
           return _this.all.apply(_this, [method, nextParams].concat(args, [iteratee]));
         });
       });
@@ -155,7 +155,7 @@ var CDO = function () {
       var _this2 = this,
           _arguments = arguments;
 
-      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       var mergedConfig = _lodash2.default.merge({
         baseURL: 'http://www.ncdc.noaa.gov/cdo-web/api/v2/',
@@ -168,16 +168,16 @@ var CDO = function () {
       return Promise.all([this.secondLimiter(), this.dayLimiter()]).then(function () {
         return (0, _axios2.default)(resource, mergedConfig);
       }).catch(function (res) {
-        var status = res.status;
-        var statusText = res.statusText;
+        var status = res.status,
+            statusText = res.statusText;
 
         debug('%s (%s %s)', readableURL, status, statusText);
         if (status === 429) return _this2.request.apply(_this2, _arguments); // rate limited, try again
         throw res;
       }).then(function (_ref) {
-        var status = _ref.status;
-        var statusText = _ref.statusText;
-        var data = _ref.data;
+        var status = _ref.status,
+            statusText = _ref.statusText,
+            data = _ref.data;
 
         debug('%s (%s %s)', readableURL, status, statusText);
         return data;
@@ -196,11 +196,11 @@ var CDO = function () {
   }, {
     key: '_paramsForSiblingPage',
     value: function _paramsForSiblingPage() {
-      var currentPageParams = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var currentPageParams = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var direction = arguments[1];
-      var offset = currentPageParams.offset;
-      var _currentPageParams$li = currentPageParams.limit;
-      var limit = _currentPageParams$li === undefined ? this.DEFAULT_LIMIT : _currentPageParams$li;
+      var offset = currentPageParams.offset,
+          _currentPageParams$li = currentPageParams.limit,
+          limit = _currentPageParams$li === undefined ? this.DEFAULT_LIMIT : _currentPageParams$li;
 
       if (typeof offset !== 'number' || offset < 0) offset = 0;else offset = {
         next: offset + limit,
