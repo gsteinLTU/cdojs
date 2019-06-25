@@ -47,7 +47,7 @@ class CDO {
           .pick('offset', 'limit')
           .defaults(params)
           .value())
-        if (params.offset >= nextParams.offset - nextParams.limit) return null
+        if (params.offset >= res.metadata.resultset.count - params.limit) return null
         return this.all(method, nextParams, ...args, iteratee)
       })
     ))
