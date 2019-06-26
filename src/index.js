@@ -13,7 +13,8 @@ class CDO {
     this.token = token
     this.opts = _.merge({}, opts)
     this.secondLimiter = rateLimit(5, 1000 + CDO.RATE_LIMIT_EPSILON_MS)
-    this.dayLimiter = rateLimit(1000, 1000*60*60*24 + CDO.RATE_LIMIT_EPSILON_MS)
+    this.dayLimiter = rateLimit(10000, 1000*60*60*24 + 
+CDO.RATE_LIMIT_EPSILON_MS)
   }
 
   datasets (params={}, config={}) { return this.request('datasets', {params, ...config}) }
